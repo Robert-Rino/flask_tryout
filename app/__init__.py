@@ -4,7 +4,7 @@ from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
 
-from security import authenticate, identity
+from app.security import authenticate, identity
 from app.resources.user import UserRegister
 from app.resources.item import Item, ItemList
 from app.resources.store import Store, StoreList
@@ -24,7 +24,7 @@ def create_app(config_name):
     api.add_resource(StoreList, '/stores')
     api.add_resource(UserRegister, '/register')
 
-    from db import db
+    from app.db import db
     db.init_app(app)
 
     @app.before_first_request
