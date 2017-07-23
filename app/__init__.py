@@ -24,13 +24,12 @@ def create_app(config_name):
     api.add_resource(StoreList, '/stores')
     api.add_resource(UserRegister, '/register')
 
-    if app.config['DEBUG']:
-        from db import db
-        db.init_app(app)
+    from db import db
+    db.init_app(app)
 
-        @app.before_first_request
-        def create_tables():
-            db.create_all()
+    @app.before_first_request
+    def create_tables():
+        db.create_all()
 
 
     return app
