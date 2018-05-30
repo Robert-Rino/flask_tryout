@@ -1,4 +1,5 @@
 *.pyc
-__pycache__
-data.db
 *.DS_Store
+*.db
+env/
+.vscode
