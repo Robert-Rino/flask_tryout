@@ -12,7 +12,7 @@ python-dateutil==2.6.0
 pytz==2017.2
 six==1.10.0
 SQLAlchemy==1.1.11
-Werkzeug==0.12.2
+Werkzeug==0.15.3
 uwsgi
 psycopg2
 altgraph==0.10.2
@@ -178,7 +178,7 @@ wcwidth==0.1.7
 webapp2==2.5.2
 webencodings==0.5.1
 WebOb==1.7.4
-Werkzeug==0.12.2
+Werkzeug==0.15.3
 widgetsnbextension==2.0.0
 word2vec==0.9.2
 wrapt==1.10.11
