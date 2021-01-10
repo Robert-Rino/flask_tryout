@@ -165,7 +165,7 @@ simplegeneric==0.8.1
 singledispatch==3.4.0.3
 six==1.10.0
 smart-open==1.5.7
-SQLAlchemy==1.2.8
+SQLAlchemy==1.3.0
 terminado==0.6
 testpath==0.3
 tornado==4.5.1
