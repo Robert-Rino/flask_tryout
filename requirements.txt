@@ -97,7 +97,7 @@ oauth2client==4.1.2
 packaging==16.8
 pandas==0.23.0
 pandocfilters==1.4.1
-paramiko==2.1.2
+paramiko==2.1.6
 pathlib2==2.2.1
 pexpect==4.2.1
 pickleshare==0.7.4
