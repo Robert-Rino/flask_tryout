@@ -11,6 +11,7 @@ from app.resources.item import Item, ItemList
 from app.resources.store import Store, StoreList
 
 from config import config
+from app.models import db
 
 def create_app():
     app = Flask(__name__)

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from app import db
+from . import db
 
 class ItemModel(db.Model):
     __tablename__ = 'items'

@@ -1,5 +1,5 @@
 # from app.db import db
-from app import db
+from . import db
 
 class UserModel(db.Model):
     __tablename__ = 'users'
