@@ -5,15 +5,16 @@ from flask_restful import Api
 from flask_jwt import JWT
 
 from app.security import authenticate, identity
-from app.resources.user import UserRegister
+from app.resources.user import User
 from app.resources.item import Item, ItemList
 from app.resources.store import Store, StoreList
+from app.models import db
 
 from config import config
 
-def create_app(config_name):
+def create_app():
     app = Flask(__name__)
-    app.config.from_object(config[config_name])
+    app.config.from_object(config.get(os.getenv('FLASK_CONFIG') or 'default'))
     api = Api(app)
 
     jwt = JWT(app, authenticate, identity) #/auth
@@ -22,9 +23,12 @@ def create_app(config_name):
     api.add_resource(Item, '/item/<string:name>')
     api.add_resource(ItemList, '/items')
     api.add_resource(StoreList, '/stores')
-    api.add_resource(UserRegister, '/register')
+    api.add_resource(User, '/user')
 
-    from app.db import db
+    @app.route('/', endpoint='health_check')
+    def health_check():
+        return 'ok'
+
     db.init_app(app)
 
     @app.before_first_request

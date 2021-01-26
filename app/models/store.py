@@ -1,4 +1,5 @@
-from app.db import db
+# -*- coding: utf-8 -*-
+from app import db
 
 class StoreModel(db.Model):
 
