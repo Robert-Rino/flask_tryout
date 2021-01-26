@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 
 from flask import Flask
@@ -8,7 +9,6 @@ from app.security import authenticate, identity
 from app.resources.user import User
 from app.resources.item import Item, ItemList
 from app.resources.store import Store, StoreList
-from app.models import db
 
 from config import config
 
