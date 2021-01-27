@@ -6,9 +6,7 @@ from flask_restful import Api
 from flask_jwt import JWT
 
 from app.security import authenticate, identity
-from app.resources.user import User
-from app.resources.item import Item, ItemList
-from app.resources.store import Store, StoreList
+from app.resources import user, item, store
 
 from config import config
 from app.models import db
@@ -20,11 +18,11 @@ def create_app():
 
     jwt = JWT(app, authenticate, identity) #/auth
 
-    api.add_resource(Store, '/store/<string:name>')
-    api.add_resource(Item, '/item/<string:name>')
-    api.add_resource(ItemList, '/items')
-    api.add_resource(StoreList, '/stores')
-    api.add_resource(User, '/user')
+    api.add_resource(store.StoreResource, '/store/<string:name>')
+    api.add_resource(item.ItemResource, '/item/<string:name>')
+    api.add_resource(item.ItemList, '/items')
+    api.add_resource(store.StoreList, '/stores')
+    api.add_resource(user.UserResource, '/user')
 
     @app.route('/', endpoint='health_check')
     def health_check():

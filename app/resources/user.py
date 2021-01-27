@@ -1,7 +1,8 @@
+from flask import make_response
 from flask_restful import Resource, reqparse
-from app.models.user import UserModel
+from app.models.user import User
 
-class User(Resource):
+class UserResource(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('username',
     type=str,
@@ -17,19 +18,20 @@ class User(Resource):
         data = self.parser.parse_args()
         print('data', data)
 
-        if (user := UserModel.find_by_username(data['username'])):
-            print('user', user)
-            return {'message': "User found"}, 200
+        if (user := User.find_by_username(data['username'])):
+            return {
+                'message': user.username,
+            }
 
         return {'message': 'User not found.'}, 404
 
     def post(self):
         data = self.parser.parse_args()
 
-        if UserModel.find_by_username(data['username']):
+        if User.find_by_username(data['username']):
             return {'message': "A user with that username is already exists"}, 400
 
-        user = UserModel(**data)
+        user = User(**data)
         user.save_to_db()
 
         return {'message': 'User created successfully.'}, 201

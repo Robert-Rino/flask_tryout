@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 from flask_restful import Resource
-from app.models.store import StoreModel
+from app.models.store import Store
 
-class Store(Resource):
+class StoreResource(Resource):
     def get(self, name):
-        store = StoreModel.find_by_name(name)
+        store = Store.find_by_name(name)
 
         if store:
             return store.json(), 200
         return {'message': 'store not found'}, 404
 
     def post(self, name):
-        if StoreModel.find_by_name(name):
+        if Store.find_by_name(name):
             return {'message': 'An store with name {} already exists.'.format(name)}, 400
 
-        store = StoreModel(name)
+        store = Store(name)
 
         try:
             store.save_to_db()
@@ -23,7 +23,7 @@ class Store(Resource):
         return store.json(), 201
 
     def delete(self, name):
-        store = StoreModel.find_by_name(name)
+        store = Store.find_by_name(name)
         if store:
             store.delete_from_db()
             return {'message': 'Store deleted'}
@@ -33,6 +33,6 @@ class Store(Resource):
 
 class StoreList(Resource):
     def get(self):
-        stores = StoreModel.query.all()
+        stores = Store.query.all()
         result = [store.json() for store in stores]
         return {'stores':result}
