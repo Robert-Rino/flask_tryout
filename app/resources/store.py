@@ -19,7 +19,7 @@ class StoreResource(Resource):
         try:
             store.save_to_db()
         except:
-            return {'message':'An error occured when inserting data' }, 500
+            return {'message':'An error occured when inserting data'}, 500
         return store.json(), 201
 
     def delete(self, name):

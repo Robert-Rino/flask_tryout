@@ -7,6 +7,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'development-key'
+    JWT_SECRET_KEY = os.environ['JWT_SECRET_KEY']
 
     @staticmethod
     def init_app(app):
