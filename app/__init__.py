@@ -30,12 +30,8 @@ def create_app():
         return {'code': 'AUTH_ERROR'}, 401
 
 
-    from app.resources import user, item, store, login, article
+    from app.resources import user, login, article
 
-    api.add_resource(store.StoreResource, '/store/<string:name>')
-    api.add_resource(item.ItemResource, '/item/<string:name>')
-    api.add_resource(item.ItemList, '/items')
-    api.add_resource(store.StoreList, '/stores')
     api.add_resource(user.UserResource, '/user')
     api.add_resource(login.LoginResource, '/login')
     api.add_resource(
