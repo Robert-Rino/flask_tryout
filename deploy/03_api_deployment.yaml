@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-tryout
+  template:
+    metadata:
+      labels:
+        app: flask-tryout
+    spec:
+      containers:
+      - name: flask-tryout
+        image: a901002666/flask_tryout
+        command: ['python -m flask run -h 0.0.0.0 -p 8000 --debugger --reload']
+        ports:
+        - containerPort: 8000
