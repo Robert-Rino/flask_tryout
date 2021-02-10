@@ -13,8 +13,8 @@ class Config:
     SECRET_KEY = 'development-key'
 
     # flask-jwt-exxtended
-    JWT_SECRET_KEY = os.environ['JWT_SECRET_KEY'] or 'secret'
-    JWT_IDENTITY_CLAIM = os.environ['JWT_IDENTITY_CLAIM'] or 'sub'
+    JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY') or 'secret'
+    JWT_IDENTITY_CLAIM = os.environ.get('JWT_IDENTITY_CLAIM') or 'sub'
     JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(days=14)
 
 
