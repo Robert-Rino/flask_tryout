@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response
 from flask_restful import Api as _Api
 from flask_jwt_extended import (JWTManager, jwt_required, create_access_token,
     get_jwt_identity, exceptions)
@@ -43,6 +43,11 @@ def create_app():
     @app.route('/', endpoint='health_check')
     def health_check():
         return 'ok'
+
+    @app.route('/.well-known/pki-validation/2A1E66F75F4AB6CDB31755C18B8FF515.txt')
+    def wellknown():
+        with open('statics/wellknown.txt') as f:
+            return make_response(f.read())
 
     db.init_app(app)
 
