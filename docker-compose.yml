@@ -19,19 +19,19 @@ networks:
 volumes:
   postgres:
 services:
-  # frontend:
-  #   image: openresty/openresty:alpine
-  #   volumes:
-  #   - ./config/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
-  #   - ./staticfiles:/usr/share/nginx/html:ro
-  #   environment:
-  #     VERSION: HEAD
-  #   ports:
-  #   - "8000:80"
-  #   depends_on:
-  #   - web
-  #   networks:
-  #   - default
+  frontend:
+    image: nginx:1.19-alpine
+    volumes:
+    - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./staticfiles:/usr/share/nginx/html:ro
+    environment:
+      VERSION: HEAD
+    ports:
+    - "8000:80"
+    depends_on:
+    - web
+    networks:
+    - default
   web:
     command: python -m flask run -h 0.0.0.0 -p 8000 --debugger --reload
     build:
@@ -42,12 +42,13 @@ services:
       PYTHONWARNINGS: default
     volumes:
     - .:/usr/src/app/
-    ports:
-    - "8000:8000"
+    # ports:
+    # - "8000:8000"
     networks:
     - default
   postgres:
-    image: postgres
+    # image: postgres:12.5
+    image: timescale/timescaledb:latest-pg12
     ports:
     - "5432:5432"
     volumes:
@@ -55,7 +56,7 @@ services:
     environment:
       POSTGRES_USER: example
       POSTGRES_PASSWORD: example
-      POSTGRES_DB: example
+      POSTGRES_DB: test
     networks:
       - default
   adminer:
